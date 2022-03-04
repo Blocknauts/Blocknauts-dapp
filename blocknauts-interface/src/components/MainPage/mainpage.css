@@ -1,0 +1,40 @@
+.mainpage__title {
+    color: white;
+    font-weight: 800;
+    width: 50%;
+    font-size: 30px;
+}
+
+.mainpage__container {
+    display: flex;
+    margin-top: 3%;
+}
+
+.mainpage__paragraph {
+    margin-top: 4%;
+    color: white;
+}
+
+.mainpage__featuresbutton {
+    background: #6C6C70;
+    color: white;
+    border-radius: 20px;
+    border-color: transparent;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    margin-top: 4%;
+    font-weight: 500;
+}
+
+.mainpage__appbutton {
+    background: #5800FF;
+    color: white;
+    border-radius: 20px;
+    border-color: transparent;
+    width: 150px;
+    height: 40px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 4%;
+}

@@ -1,10 +1,16 @@
 import React from 'react';
+import Header from './components/Header/header.js'
+import MainPage from './components/MainPage/mainpage.js'
+import Calltoaction from './components/Calltoaction/calltoaction.js'
+import './styles/main.css'
 
 export default function App() {
   return (
-    <div className='container'>
-      <h1>Web3Con2022 - Blocknauts</h1>
-    </div>
+    <div>
+      <Header />
+      <MainPage />
+      <Calltoaction />
+     </div>
 );
 
 }
