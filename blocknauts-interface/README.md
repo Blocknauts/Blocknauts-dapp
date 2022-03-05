@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Important Note
+
+At the moment this needs to use Node 16.
+
+This is tested with `v16.13.1`
+
 ## Available Scripts
 
 In the project directory, you can run:
