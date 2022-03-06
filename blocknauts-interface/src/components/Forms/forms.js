@@ -7,42 +7,44 @@ function Forms() {
   const [font, setNextFont] = useState("Open Sans");
   const [highlightColor, setHighlightColor] = useState("#0000ff");
   const [fontColor, setFontColor] = useState("#0000ff");
-  const [isDark, setIsDark] = useState("");
-  const [cookie, setCookie] = useState(true);
+  const [isDark, setIsDark] = useState(true);
+  const [cookie, setCookie] = useState("no");
 
   function getAccessToken() {
     // If you're just testing, you can paste in a token
     // and uncomment the following line:
     return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDQ3NDU5Mzk3MEFjQTIwMmQ2NGM1NmU1OTRiNkQ1MTBBOTNlRjk3ODkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NDY1Njk1MTQ1MDMsIm5hbWUiOiJibG9ja25hdXRzIn0.pmxNt34aCQnQR2avWqQTelCcHO-I5aaCpIxZmvruX3s";
-
-    // In a real app, it's better to read an access token from an
-    // environement variable or other configuration that's kept outside of
-    // your code base. For this to work, you need to set the
-    // WEB3STORAGE_TOKEN environment variable before you run your code.
+    //!! use this
     // return process.env.WEB3STORAGE_TOKEN;
   }
 
   function makeStorageClient() {
-    return new Web3Storage({ token: getAccessToken() });
+    return new Web3Storage({
+      token: getAccessToken(),
+    });
   }
 
-  makeStorageClient();
+  async function storeFiles() {
+    const client = makeStorageClient();
 
-  function updateUserPreferences() {
-    // You can create File objects from a Blob of binary data
-    // see: https://developer.mozilla.org/en-US/docs/Web/API/Blob
-    // Here we're just storing a JSON object, but you can store images,
-    // audio, or whatever you want!
-    const obj = { hello: "world" };
+    const obj = {
+      cookie: cookie,
+      font: font,
+      highlightColor: highlightColor,
+      fontColor: fontColor,
+      isDark: isDark,
+    };
+    console.log(obj);
     const blob = new Blob([JSON.stringify(obj)], {
       type: "application/json",
     });
-
-    const files = [
-      new File(["contents-of-file-1"], "plain-utf8.txt"),
-      new File([blob], "hello.json"),
-    ];
-    return files;
+    console.log(blob);
+    const file = new File([blob], "userPrefs.json");
+    console.log(file);
+    const cid = await client.put([file]);
+    console.log(cid);
+    console.log("stored files with cid:", cid);
+    return cid;
   }
 
   return (
@@ -51,11 +53,9 @@ function Forms() {
         <span className="forms__button">
           <div className="forms__cookies">
             <p>Cookie Preferences</p>
-            <select name="select">
-              <option value="value1">Yes</option>
-              <option value="value2" selected>
-                No
-              </option>
+            <select name="select" onChange={(e) => setCookie(e.target.value)}>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           <div className="forms__highlightcolor">
@@ -90,17 +90,13 @@ function Forms() {
             <select
               name="select"
               defaultValue={isDark}
-              onChange={(e) => {
-                console.log(e.target.value);
-                console.log(e);
-                setIsDark(!e.target.value);
-                console.log(isDark);
-              }}
+              onChange={(e) => setIsDark(e.target.value)}
             >
               <option value={true}>True</option>
               <option value={false}>False</option>
             </select>
           </div>
+          <button onClick={() => storeFiles()}> Save </button>
         </span>
       </div>
     </div>
