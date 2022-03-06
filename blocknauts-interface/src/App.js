@@ -1,17 +1,17 @@
 import React from 'react';
-import Header from './components/Header/header.js'
-import MainPage from './components/MainPage/mainpage.js'
-import Calltoaction from './components/Calltoaction/calltoaction.js'
+import Main from './Main.js'
+import Forms from './components/Forms/forms.js'
 import './styles/main.css'
+import { Routes, Route, Outlet, BrowserRouter as Router, } from "react-router-dom";
 
 export default function App() {
   return (
-    <div>
-      <Header />
-      <MainPage />
-      <Calltoaction />
-     </div>
-
+    <Router>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/form" element={<Forms />} />
+      </Routes>
+    </Router>
 );
 
 }

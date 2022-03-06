@@ -2,6 +2,9 @@
 
 * {
     font-family: 'SF Pro Display', sans-serif;
-    background: #0A0A14;
     margin: 0% 0% 0% 1%;
+}
+
+body {
+    background: #0A0A14;
 }
