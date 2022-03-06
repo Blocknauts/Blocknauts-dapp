@@ -4,6 +4,7 @@ import FontPicker from "font-picker-react";
 import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
 import { Contract, providers, utils } from "ethers";
 import { abi, CONTRACT_ADDRESS } from "../../constants";
+import Web3Modal from "web3modal";
 
 function Forms() {
   const [font, setNextFont] = useState("Open Sans");
@@ -73,6 +74,11 @@ function Forms() {
   const getProviderOrSigner = async (needSigner = false) => {
     // Connect to Metamask
     // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
+    console.log(web3ModalRef);
+    web3ModalRef.current = new Web3Modal({
+      providerOptions: {},
+      disableInjectedProvider: false,
+    });
     const provider = await web3ModalRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider);
 
