@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import "./forms.css";
 import FontPicker from "font-picker-react";
 import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
+import { Contract, providers, utils } from "ethers";
+import { abi, CONTRACT_ADDRESS } from "../../constants";
 
 function Forms() {
   const [font, setNextFont] = useState("Open Sans");
@@ -9,6 +11,7 @@ function Forms() {
   const [fontColor, setFontColor] = useState("#0000ff");
   const [isDark, setIsDark] = useState(true);
   const [cookie, setCookie] = useState("no");
+  const web3ModalRef = useRef();
 
   function getAccessToken() {
     // If you're just testing, you can paste in a token
@@ -44,8 +47,41 @@ function Forms() {
     const cid = await client.put([file]);
     console.log(cid);
     console.log("stored files with cid:", cid);
-    return cid;
+    writePreferences(cid);
   }
+
+  const writePreferences = async (cid) => {
+    try {
+      // We need a Signer here since this is a 'write' transaction.
+      const signer = await getProviderOrSigner(true);
+      // Create a new instance of the Contract with a Signer, which allows
+      // update methods
+      const blocknautsContract = new Contract(CONTRACT_ADDRESS, abi, signer);
+      // call the setUserPreference from the contract
+      const tx = await blocknautsContract.setUserPreference(cid);
+      await tx.wait();
+      window.alert("You successfully updated your preferences");
+      // setLoading(true);
+      // wait for the transaction to get mined
+      // setLoading(false);
+    } catch (err) {
+      console.error(err);
+      window.alert("There was an error updating your preferences");
+    }
+  };
+
+  const getProviderOrSigner = async (needSigner = false) => {
+    // Connect to Metamask
+    // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
+    const provider = await web3ModalRef.current.connect();
+    const web3Provider = new providers.Web3Provider(provider);
+
+    if (needSigner) {
+      const signer = web3Provider.getSigner();
+      return signer;
+    }
+    return web3Provider;
+  };
 
   return (
     <div>
