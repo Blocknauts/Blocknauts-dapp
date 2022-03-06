@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./header.css";
 import { abi, CONTRACT_ADDRESS } from "../../constants";
-import Web3Modal from 'web3modal';
-import { Contract, providers, utils } from 'ethers';
+import Web3Modal from "web3modal";
+import { Contract, providers, utils } from "ethers";
 function Header() {
-
   // walletConnected keep track of whether the user's wallet is connected or not
   const [walletConnected, setWalletConnected] = useState(false);
 
@@ -15,24 +14,19 @@ function Header() {
   // Create a reference to the Web3 Modal (used for connecting to Metamask) which persists as long as the page is open
   const web3ModalRef = useRef();
 
-
-
   /**
-  * writePreferences: Writer user preferences to smart contract
-  */
+   * writePreferences: Writer user preferences to smart contract
+   */
   const writePreferences = async () => {
     try {
       // We need a Signer here since this is a 'write' transaction.
       const signer = await getProviderOrSigner(true);
       // Create a new instance of the Contract with a Signer, which allows
       // update methods
-      const blocknautsContract = new Contract(
-        CONTRACT_ADDRESS,
-        abi,
-        signer
-      );
+      const blocknautsContract = new Contract(CONTRACT_ADDRESS, abi, signer);
       // call the setUserPreference from the contract
-      const tx = await blocknautsContract.setUserPreference('QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco' //TODO set newCID this is a hardcoded cid
+      const tx = await blocknautsContract.setUserPreference(
+        "QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco" //TODO set newCID this is a hardcoded cid
       );
       setLoading(true);
       // wait for the transaction to get mined
@@ -43,7 +37,6 @@ function Header() {
       console.error(err);
     }
   };
-
 
   /**
    * getPreferences: gets the preferences
@@ -81,24 +74,22 @@ function Header() {
   };
 
   /**
-  * Returns a Provider or Signer object representing the Ethereum RPC with or without the
-  * signing capabilities of metamask attached
-  *
-  * A `Provider` is needed to interact with the blockchain - reading transactions, reading balances, reading state, etc.
-  *
-  * A `Signer` is a special type of Provider used in case a `write` transaction needs to be made to the blockchain, which involves the connected account
-  * needing to make a digital signature to authorize the transaction being sent. Metamask exposes a Signer API to allow your website to
-  * request signatures from the user using Signer functions.
-  *
-  * @param {*} needSigner - True if you need the signer, default false otherwise
-  */
+   * Returns a Provider or Signer object representing the Ethereum RPC with or without the
+   * signing capabilities of metamask attached
+   *
+   * A `Provider` is needed to interact with the blockchain - reading transactions, reading balances, reading state, etc.
+   *
+   * A `Signer` is a special type of Provider used in case a `write` transaction needs to be made to the blockchain, which involves the connected account
+   * needing to make a digital signature to authorize the transaction being sent. Metamask exposes a Signer API to allow your website to
+   * request signatures from the user using Signer functions.
+   *
+   * @param {*} needSigner - True if you need the signer, default false otherwise
+   */
   const getProviderOrSigner = async (needSigner = false) => {
     // Connect to Metamask
     // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
     const provider = await web3ModalRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider);
-
-
 
     if (needSigner) {
       const signer = web3Provider.getSigner();
@@ -116,7 +107,6 @@ function Header() {
       // Assign the Web3Modal class to the reference object by setting it's `current` value
       // The `current` value is persisted throughout as long as this page is open
       web3ModalRef.current = new Web3Modal({
-
         providerOptions: {},
         disableInjectedProvider: false,
       });
@@ -131,11 +121,7 @@ function Header() {
   const renderButton = () => {
     // If wallet is not connected, return a button which allows them to connect their wllet
     if (!walletConnected) {
-      return (
-        <button onClick={connectWallet} >
-          Connect your wallet
-        </button>
-      );
+      return <button onClick={connectWallet}>Connect your wallet</button>;
     }
   };
 
@@ -145,11 +131,8 @@ function Header() {
       <h1>Features</h1>
       <h1>How it works</h1>
       {renderButton()}
-      <button>Connect Wallet</button>
       <button onClick={writePreferences}>UPDATE CID</button>
-
       <button onClick={getPreferences}>GET CID</button>
-
       <p> Show User Preferences CID: {userPreferences}</p>
     </div>
   );
