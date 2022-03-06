@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./forms.css";
 import FontPicker from "font-picker-react";
-import { Web3Storage } from "web3.storage";
+import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
 
 function Forms() {
   const [font, setNextFont] = useState("Open Sans");
   const [highlightColor, setHighlightColor] = useState("#0000ff");
   const [fontColor, setFontColor] = useState("#0000ff");
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState("");
   const [cookie, setCookie] = useState(true);
 
   function getAccessToken() {
@@ -87,11 +87,18 @@ function Forms() {
           </div>
           <div className="forms__dark">
             <p>Dark</p>
-            <select name="select">
-              <option value="value1">True</option>
-              <option value="value2" selected>
-                False
-              </option>
+            <select
+              name="select"
+              defaultValue={isDark}
+              onChange={(e) => {
+                console.log(e.target.value);
+                console.log(e);
+                setIsDark(!e.target.value);
+                console.log(isDark);
+              }}
+            >
+              <option value={true}>True</option>
+              <option value={false}>False</option>
             </select>
           </div>
         </span>
