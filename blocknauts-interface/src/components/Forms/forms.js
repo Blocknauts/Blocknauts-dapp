@@ -4,6 +4,8 @@ import FontPicker from "font-picker-react";
 
 function Forms() {
     const [font, setNextFont] = useState("Open Sans")
+    const [highlightColor, setHighlightColor] = useState("#0000ff")
+    const [fontColor, setFontColor] = useState("#0000ff")
   return (
     <div>
         <div className="forms__container">
@@ -17,11 +19,11 @@ function Forms() {
                 </div>
                 <div className="forms__highlightcolor">
                     <p>Highlight Color</p>
-                    <input type="color" id="colorpicker" value="#0000ff"></input>
+                    <input type="color" id="colorpicker" value={highlightColor} onChange={(e) => setHighlightColor(e.target.value)}></input>
                 </div>
                 <div className="forms__fontcolor">
                     <p>Font Color</p>
-                    <input type="color" id="colorpicker" placeholder="Select Color" value="#0000ff"></input>
+                    <input type="color" id="colorpicker" placeholder="Select Color" value={fontColor} onChange={(e) => setFontColor(e.target.value)}></input>
                 </div>
                 <div className="forms__font">
                     <p>Font</p>
