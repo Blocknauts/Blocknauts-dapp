@@ -1,9 +1,26 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './mainpage.css'
 import iPhone from '../../assets/iPhone 13.png'
 import Code from '../../assets/code.png'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import {connectedwalletcontext} from '../../context/connectedwalletcontext.js'
+import { useNavigate } from 'react-router-dom';
 
 function Mainpage() {
+  const {walletConnected, setWalletConnected} = useContext(connectedwalletcontext);
+  const navigate = useNavigate();
+  const goToForm = () => {
+    if (walletConnected) {
+        navigate("/form")
+    } else {
+      alert("connect your wallet first")
+    }
+  }
   return (
     <div>
       <div className="mainpage__container">
@@ -16,7 +33,7 @@ function Mainpage() {
               </div>
               <div>
                 <button className="mainpage__featuresbutton">Explore features</button>
-                <button className="mainpage__appbutton">Go to app</button>
+  <button className="mainpage__appbutton" onClick={goToForm}>Go to app</button>
               </div>
         </div>
         <div className="mainpage__image">

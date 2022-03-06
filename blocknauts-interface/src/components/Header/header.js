@@ -1,12 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import "./header.css";
 import { abi, CONTRACT_ADDRESS } from "../../constants";
 import Web3Modal from "web3modal";
 import { Contract, providers, utils } from "ethers";
+import {connectedwalletcontext} from '../../context/connectedwalletcontext.js'
+
 function Header() {
   // walletConnected keep track of whether the user's wallet is connected or not
-  const [walletConnected, setWalletConnected] = useState(false);
-
+  const {walletConnected, setWalletConnected} = useContext(connectedwalletcontext);
+  
   // loading is set to true when we are waiting for a transaction to get mined
   const [loading, setLoading] = useState(false);
 
@@ -39,8 +41,8 @@ function Header() {
   };
 
   /**
-   * getPreferences: gets the preferences
-   */
+    * getPreferences: gets the preferences
+    */
   const getPreferences = async () => {
     try {
       // Get the provider from web3Modal, which in our case is MetaMask
@@ -48,16 +50,21 @@ function Header() {
       const provider = await getProviderOrSigner();
       // We connect to the Contract using a Provider, so we will only
       // have read-only access to the Contract
+      // We will get the signer now to extract the address of the currently connected MetaMask account
+      const signer = await getProviderOrSigner(true);
+      // Get the address associated to the signer which is connected to  MetaMask
+      const address = await signer.getAddress();
       const blocknautsContract = new Contract(CONTRACT_ADDRESS, abi, provider);
       // call the getUserPreference from the contract
-      const _preferences = await blocknautsContract.getUserPreference();
-
+      const _preferences = await blocknautsContract.userPreferences(address);
+      // const _preferences = await blocknautsContract.userPreferences('0xD69DD3b617B24BdEc18F126eB2eA0Be072829A45');
       console.log(_preferences);
-      setUserPreferences(_preferences.toString());
+      setUserPreferences(_preferences);
     } catch (err) {
       console.error(err);
     }
   };
+
 
   /*
      connectWallet: Connects the MetaMask wallet
