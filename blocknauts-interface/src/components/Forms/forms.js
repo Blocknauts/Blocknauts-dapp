@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./forms.css";
 import FontPicker from "font-picker-react";
-import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
+import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
+
 
 function Forms() {
   const [font, setNextFont] = useState("Open Sans");
   const [highlightColor, setHighlightColor] = useState("#0000ff");
   const [fontColor, setFontColor] = useState("#0000ff");
-  const [isDark, setIsDark] = useState("");
+  const [isDark, setIsDark] = useState(true);
   const [cookie, setCookie] = useState(true);
+  console.log(isDark);
 
+  console.log(cookie)
   function getAccessToken() {
     // If you're just testing, you can paste in a token
     // and uncomment the following line:
@@ -51,10 +54,14 @@ function Forms() {
         <span className="forms__button">
           <div className="forms__cookies">
             <p>Cookie Preferences</p>
-            <select name="select">
-              <option value="value1">Yes</option>
-              <option value="value2" selected>
-                No
+            <select name="select"
+              defaultValue={cookie}
+              onChange={(e) => {
+                setCookie(e.target.value);
+              }}>
+              <option value={true}>True</option>
+              <option value={false}>
+                False
               </option>
             </select>
           </div>
@@ -91,10 +98,7 @@ function Forms() {
               name="select"
               defaultValue={isDark}
               onChange={(e) => {
-                console.log(e.target.value);
-                console.log(e);
-                setIsDark(!e.target.value);
-                console.log(isDark);
+                setIsDark(e.target.value);
               }}
             >
               <option value={true}>True</option>

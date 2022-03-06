@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "react-router-dom": "^6.2.2"
+  },
+  "dependencies": {
+    "ipfs-car": "^0.6.2"
   }
 }
