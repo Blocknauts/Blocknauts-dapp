@@ -5,6 +5,11 @@ This project is part of a challenge for the hackaton organized by Web3Con.
 
 It's made by @iamverg, @SamRogers.eth, @sidc0des, @Taylor Wang, @voruh the exploruh
 
+Form site: https://web3preferences-fiwwjrxfb-blocknauts.vercel.app/ 
+
+Check out our demo site at: https://blocknauts-example.vercel.app/
+
+
 # File/Repo structure
 
 `blocknauts-contract/` is where you can find all of our smart contracts
@@ -15,7 +20,6 @@ You can find the code for the Node.js package here: https://github.com/web3con22
 
 Lastly, the code for our demo site is found here: https://github.com/web3con22-team/Blocknauts-example
 
-Check out our demo site at: https://blocknauts-example.vercel.app/
 
 # How does our project work?
 
