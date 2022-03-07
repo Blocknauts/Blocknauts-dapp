@@ -134,13 +134,7 @@ function Header() {
 
   return (
     <div className="header__container">
-      <h1>Home</h1>
-      <h1>Features</h1>
-      <h1>How it works</h1>
       {renderButton()}
-      <button onClick={writePreferences}>UPDATE CID</button>
-      <button onClick={getPreferences}>GET CID</button>
-      <p> Show User Preferences CID: {userPreferences}</p>
     </div>
   );
 }

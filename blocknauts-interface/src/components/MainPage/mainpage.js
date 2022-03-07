@@ -26,7 +26,8 @@ function Mainpage() {
       <div className="mainpage__container">
         <div>
               <div className='mainpage__title'>
-                <h1>The #1 fully-customizable Web3.0 app</h1>
+                <h1>Web3preferences</h1>
+                <h2>The #1 fully-customizable Web3.0 app</h2>
               </div>
               <div className="mainpage__paragraph">
                 <p>Create a smart contract with customizable settings <br />and transfer it in matter of seconds</p>
@@ -37,7 +38,7 @@ function Mainpage() {
               </div>
         </div>
         <div className="mainpage__image">
-              <img src={iPhone}  />
+              <img src={iPhone}/>
         </div>
       </div>
       <div className="mainpage__features">
