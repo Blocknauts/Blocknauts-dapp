@@ -13,7 +13,7 @@ Part 2: A small js lib which website owners can use to fetch those settings if t
 
 # Project architecture
 
-[274c40121057666e3b114c4e352b99cb](https://user-images.githubusercontent.com/74734921/156951455-60c3dbf2-294b-46bd-b7dd-51222d62da55.png)
+![274c40121057666e3b114c4e352b99cb](https://user-images.githubusercontent.com/74734921/156951455-60c3dbf2-294b-46bd-b7dd-51222d62da55.png)
 
 ![5273d04338b3e60be80e39e242b0cf15](https://user-images.githubusercontent.com/74734921/156951463-41ef7ee6-8ee8-4e31-80fe-83afb091e398.png)
 
