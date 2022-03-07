@@ -23,7 +23,7 @@ function Forms() {
   const navigate = useNavigate();
 
 
-  useEffect((walletConnected) => {
+  useEffect(() => {
     if (!walletConnected) {
       navigate("/")
     }
