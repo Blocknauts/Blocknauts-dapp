@@ -12,11 +12,20 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Forms() {
-  const [font, setNextFont] = useState("Open Sans");
-  const [highlightColor, setHighlightColor] = useState("#0000ff");
-  const [fontColor, setFontColor] = useState("#0000ff");
-  const [isDark, setIsDark] = useState(true);
-  const [cookie, setCookie] = useState("no");
+  const [preferences, setPreferences] = useState({
+    theme: {
+      colorMode: 'dark',
+      font: 'Open Sans',
+      fontColor: '#131313',
+      highlight: '#0000ff',
+    },
+    cookies: {
+      strictlyNecessary: true,
+      performance: false,
+      functional: false,
+      targeting: false,
+    }
+  });
   const web3ModalRef = useRef();
   const {walletConnected, setWalletConnected} = useContext(connectedwalletcontext);
   console.log(walletConnected)
@@ -29,11 +38,29 @@ function Forms() {
     }
   }, []);
 
-  console.log(cookie)
+  function updatePreferencesState(category, e) {
+    console.log(preferences[category][e.target.name]);
+    let newPreferences = { ...preferences };
+
+    let newValue = e.target.value;
+    if (category === 'cookies') newValue = e.target.checked;
+
+    newPreferences[category][e.target.name] = newValue;
+    setPreferences(newPreferences);
+    console.log(preferences[category][e.target.name]);
+  }
+
+  function updateFontPreference(name) {
+    let newPreferences = { ...preferences };
+    newPreferences.theme.font = name;
+    setPreferences(newPreferences);
+  }
+
   function getAccessToken() {
     // If you're just testing, you can paste in a token
     // and uncomment the following line:
-    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDQ3NDU5Mzk3MEFjQTIwMmQ2NGM1NmU1OTRiNkQ1MTBBOTNlRjk3ODkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NDY1Njk1MTQ1MDMsIm5hbWUiOiJibG9ja25hdXRzIn0.pmxNt34aCQnQR2avWqQTelCcHO-I5aaCpIxZmvruX3s";
+    // return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDQ3NDU5Mzk3MEFjQTIwMmQ2NGM1NmU1OTRiNkQ1MTBBOTNlRjk3ODkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NDY1Njk1MTQ1MDMsIm5hbWUiOiJibG9ja25hdXRzIn0.pmxNt34aCQnQR2avWqQTelCcHO-I5aaCpIxZmvruX3s";
+    return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkwOEY4N2E3ZDQ1MUM3QjlBRTY5ZkQ2ZDMzY2VDOGQyQWJjYzM1NDgiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NDY1MDg4MTAzOTEsIm5hbWUiOiJ3ZWIzcHJlZmVyZW5jZXMifQ.Amrvvz318rge_MdXetdmGnP4nMr-inHD9SPSFYXk2Vc"
     //!! use this
     // return process.env.WEB3STORAGE_TOKEN;
   }
@@ -47,13 +74,7 @@ function Forms() {
   async function storeFiles() {
     const client = makeStorageClient();
 
-    const obj = {
-      cookie: cookie,
-      font: font,
-      highlightColor: highlightColor,
-      fontColor: fontColor,
-      isDark: isDark,
-    };
+    const obj = { ...preferences };
     console.log(obj);
     const blob = new Blob([JSON.stringify(obj)], {
       type: "application/json",
@@ -109,51 +130,80 @@ function Forms() {
     <div>
       <div className="forms__container">
         <span className="forms__button">
-          <div className="forms__cookies">
-            <p>Cookie Preferences</p>
-            <select name="select" onChange={(e) => setCookie(e.target.value)}>
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
-            </select>
-          </div>
-          <div className="forms__highlightcolor">
-            <p>Highlight Color</p>
+          <fieldset>
+            <legend>Theme</legend>
+            <div className="forms__highlightcolor">
+              <p>Highlight Color</p>
+              <input
+                type="color"
+                id="colorpicker"
+                value={preferences.theme.highlight}
+                name="highlight"
+                onChange={(e) => updatePreferencesState("theme", e)}
+              ></input>
+            </div>
+            <div className="forms__fontcolor">
+              <p>Font Color</p>
+              <input
+                type="color"
+                id="colorpicker"
+                placeholder="Select Color"
+                name="fontColor"
+                value={preferences.theme.fontColor}
+                onChange={(e) => updatePreferencesState("theme", e)}
+              ></input>
+            </div>
+            <div className="forms__font">
+              <p>Font</p>
+              <FontPicker
+                apiKey="AIzaSyCTtR89twV3uThtcKhEv-DC17FDLOSqM3c"
+                activeFontFamily={preferences.theme.font}
+                onChange={(nextFont) => updateFontPreference(nextFont.family)}
+              />
+            </div>
+            <div className="forms__dark">
+              <p>Color Mode</p>
+              <select
+                name="colorMode"
+                defaultValue={preferences.theme.colorMode}
+                onChange={(e) => updatePreferencesState("theme", e)}
+              >
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
+            </div>
+          </fieldset>
+          <fieldset className="forms__cookies">
+            <legend>Cookie Preferences</legend>
             <input
-              type="color"
-              id="colorpicker"
-              value={highlightColor}
-              onChange={(e) => setHighlightColor(e.target.value)}
+              type="checkbox"
+              name="strictlyNecessary"
+              checked={preferences.cookies.strictlyNecessary}
+              onChange={(e) => updatePreferencesState("cookies", e)}
             ></input>
-          </div>
-          <div className="forms__fontcolor">
-            <p>Font Color</p>
+            <label htmlFor="strictlyNecessary">Strictly Necessary</label>
             <input
-              type="color"
-              id="colorpicker"
-              placeholder="Select Color"
-              value={fontColor}
-              onChange={(e) => setFontColor(e.target.value)}
+              type="checkbox"
+              name="performance"
+              checked={preferences.cookies.performance}
+              onChange={(e) => updatePreferencesState("cookies", e)}
             ></input>
-          </div>
-          <div className="forms__font">
-            <p>Font</p>
-            <FontPicker
-              apiKey="AIzaSyCTtR89twV3uThtcKhEv-DC17FDLOSqM3c"
-              activeFontFamily={font}
-              onChange={(nextFont) => setNextFont(nextFont.family)}
-            />
-          </div>
-          <div className="forms__dark">
-            <p>Dark</p>
-            <select
-              name="select"
-              defaultValue={isDark}
-              onChange={(e) => setIsDark(e.target.value)}
-            >
-              <option value={true}>True</option>
-              <option value={false}>False</option>
-            </select>
-          </div>
+            <label htmlFor="performance">Performance</label>
+            <input
+              type="checkbox"
+              name="functional"
+              checked={preferences.cookies.functional}
+              onChange={(e) => updatePreferencesState("cookies", e)}
+            ></input>
+            <label htmlFor="functional">Functional</label>
+            <input
+              type="checkbox"
+              name="targeting"
+              checked={preferences.cookies.targeting}
+              onChange={(e) => updatePreferencesState("cookies", e)}
+            ></input>
+            <label htmlFor="targeting">Targeting</label>
+          </fieldset>
           <button onClick={() => storeFiles()}> Save </button>
         </span>
       </div>
