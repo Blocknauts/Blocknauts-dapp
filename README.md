@@ -7,6 +7,7 @@ It's made by @iamverg, @SamRogers.eth, @sidc0des, @Taylor Wang, @voruh the explo
 
 # Technologies used ✨
 Frontend: React, CSS, HTML, JS.
+
 Backend: Solidity, Hardhat, Filecoin.
 
 # Figma 🎨
