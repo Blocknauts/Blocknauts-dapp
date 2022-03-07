@@ -11,6 +11,19 @@ Part 1: Users can sign in with their wallet, have an interface where they can se
 
 Part 2: A small js lib which website owners can use to fetch those settings if the user signed in on their website with their wallet. So the websites dev is able to allow the user do modifiy, for example font-size, background-color of the site... to set an personal theme on the websites. Useful for customizing, for visual impaired people who need a high contrast font-color + size and many more...!
 
+# File/Repo structure
+
+`blocknauts-contract` is where you can find all of our smart contracts
+
+`blocknauts-interface` is where you can find the form website for Web3Preferences
+
+You can find the code for the Node.js package here: https://github.com/web3con22-team/Blocknauts
+
+Lastly, the code for our demo site is found here: https://github.com/web3con22-team/Blocknauts-example
+
+Check out our demo site at: https://blocknauts-example.vercel.app/
+
+
 # Project architecture
 
 ![274c40121057666e3b114c4e352b99cb](https://user-images.githubusercontent.com/74734921/156951455-60c3dbf2-294b-46bd-b7dd-51222d62da55.png)
