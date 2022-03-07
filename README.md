@@ -9,7 +9,13 @@ It's made by @iamverg, @SamRogers.eth, @sidc0des, @Taylor Wang, @voruh the explo
 
 Part 1: Users can sign in with their wallet, have an interface where they can set different options like do-not-track me, font-size, color... like a theme. Save them decentralized in a smart contract. 
 
-Part 2: A small js lib which website owners can use to fetch those settings if the user signed in on their website with their wallet. So the websites dev is able to allow the user do modifiy, for example font-size, background-color of the site... to set an personal theme on the websites. Useful for customizing, for visual impaired people who need a high contrast font-color + size and many more...
+Part 2: A small js lib which website owners can use to fetch those settings if the user signed in on their website with their wallet. So the websites dev is able to allow the user do modifiy, for example font-size, background-color of the site... to set an personal theme on the websites. Useful for customizing, for visual impaired people who need a high contrast font-color + size and many more...!
+
+# Project architecture
+
+[274c40121057666e3b114c4e352b99cb](https://user-images.githubusercontent.com/74734921/156951455-60c3dbf2-294b-46bd-b7dd-51222d62da55.png)
+![5273d04338b3e60be80e39e242b0cf15](https://user-images.githubusercontent.com/74734921/156951463-41ef7ee6-8ee8-4e31-80fe-83afb091e398.png)
+
 
 # Technologies used ✨
 Frontend: React, CSS, HTML, JS.
