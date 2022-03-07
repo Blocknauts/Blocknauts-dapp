@@ -13,9 +13,9 @@ Part 2: A small js lib which website owners can use to fetch those settings if t
 
 # File/Repo structure
 
-`blocknauts-contract` is where you can find all of our smart contracts
+`blocknauts-contract/` is where you can find all of our smart contracts
 
-`blocknauts-interface` is where you can find the form website for Web3Preferences
+`blocknauts-interface/` is where you can find the form website for Web3Preferences
 
 You can find the code for the Node.js package here: https://github.com/web3con22-team/Blocknauts
 
