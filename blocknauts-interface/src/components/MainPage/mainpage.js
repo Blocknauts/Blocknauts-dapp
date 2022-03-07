@@ -30,7 +30,7 @@ function Mainpage() {
                 <h2>The #1 fully-customizable Web3.0 app</h2>
               </div>
               <div className="mainpage__paragraph">
-                <p>Create a smart contract with customizable settings <br />and transfer it in matter of seconds</p>
+                <p>Let web3 apps access your preferences through a smart contract. <br />Update them across all supported apps in seconds.</p>
               </div>
               <div>
                 <button className="mainpage__featuresbutton">Explore features</button>
@@ -50,7 +50,7 @@ function Mainpage() {
             <div className="mainpage__featurebox">
               <p></p>
               <h1>Color Changer</h1>
-              <h5>Our main features and everything our app has to offer to our customers.</h5>
+              <h5>Choose a global site theme and accents without having to toggle themes manually</h5>
             </div>
             <div className="mainpage__featurebox">
               <p></p>
