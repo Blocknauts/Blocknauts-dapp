@@ -5,12 +5,6 @@ This project is part of a challenge for the hackaton organized by Web3Con.
 
 It's made by @iamverg, @SamRogers.eth, @sidc0des, @Taylor Wang, @voruh the exploruh
 
-# How does our project work?
-
-Part 1: Users can sign in with their wallet, have an interface where they can set different options like do-not-track me, font-size, color... like a theme. Save them decentralized in a smart contract. 
-
-Part 2: A small js lib which website owners can use to fetch those settings if the user signed in on their website with their wallet. So the websites dev is able to allow the user do modifiy, for example font-size, background-color of the site... to set an personal theme on the websites. Useful for customizing, for visual impaired people who need a high contrast font-color + size and many more...!
-
 # File/Repo structure
 
 `blocknauts-contract/` is where you can find all of our smart contracts
@@ -23,6 +17,11 @@ Lastly, the code for our demo site is found here: https://github.com/web3con22-t
 
 Check out our demo site at: https://blocknauts-example.vercel.app/
 
+# How does our project work?
+
+Part 1: Users can sign in with their wallet, have an interface where they can set different options like do-not-track me, font-size, color... like a theme. Save them decentralized in a smart contract. 
+
+Part 2: A small js lib which website owners can use to fetch those settings if the user signed in on their website with their wallet. So the websites dev is able to allow the user do modifiy, for example font-size, background-color of the site... to set an personal theme on the websites. Useful for customizing, for visual impaired people who need a high contrast font-color + size and many more...!
 
 # Project architecture
 
