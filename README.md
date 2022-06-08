@@ -1,6 +1,6 @@
 # Blocknauts-dapp
 
-# BlockNauts team Hackaton dAPP 👨‍💻👩‍💻
+# BlockNauts team Hackathon dAPP 👨‍💻👩‍💻
 This project is part of a challenge for the hackaton organized by Web3Con.
 
 It's made by @iamverg, @SamRogers.eth, @sidc0des, @Taylor Wang, @voruh the exploruh
